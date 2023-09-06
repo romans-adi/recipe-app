@@ -10,4 +10,12 @@ class Recipe < ApplicationRecord
   def toggle_privacy!
     update(public: !public)
   end
+
+  def food_quantity
+    recipe_foods.sum(:quantity)
+  end
+
+  def total_price
+    recipe_foods.sum { |recipe_food| recipe_food.food.price * recipe_food.quantity }
+  end
 end
