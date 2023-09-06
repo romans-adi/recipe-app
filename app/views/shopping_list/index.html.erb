@@ -11,15 +11,22 @@
     <p><%= number_to_currency(@total_price, unit: '$') %></p>
   </div>
 </div>
-<% @foods.each do |ingredient| %>
-  <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
-    <p><%= ingredient.name %></p>
-  </div>
-  <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
-    <p><%= ingredient.total_quantity_recipes %> <%= ingredient.measurement_unit %></p>
-  </div>
-  <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
-    <p><%= number_to_currency(ingredient.price * ingredient.total_quantity_recipes, unit: '$') %></p>
-  </div>
-<% end %>
+<table class="mt-4 w-full bg-black bg-opacity-50 shadow-md rounded-md overflow-hidden text-white">
+  <thead class="bg-black bg-opacity-75 border-b">
+    <tr>
+      <th class="py-3 px-4">Food</th>
+      <th class="py-3 px-4">Quantity</th>
+      <th class="py-3 px-4">Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @foods.each do |ingredient| %>
+      <tr class="border-b">
+        <td class="py-3 px-4"><%= ingredient.name %></td>
+        <td class="py-3 px-4"><%= ingredient.total_quantity_recipes %> <%= ingredient.measurement_unit %></td>
+        <td class="py-3 px-4"><%= number_to_currency(ingredient.price * ingredient.total_quantity_recipes, unit: '$') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </div>
