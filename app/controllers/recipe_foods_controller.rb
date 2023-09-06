@@ -12,6 +12,10 @@ class RecipeFoodsController < ApplicationController
     @available_foods = current_user.foods.reject { |f| @recipe.foods.include?(f) }
     @recipe_food = RecipeFood.new(recipe_food_params.merge(recipe_id: @recipe.id, user_id: current_user.id))
     if @recipe_food.save
+      food = @recipe_food.food
+      food.quantity -= @recipe_food.quantity
+      food.save
+
       redirect_to recipe_path(@recipe.id)
     else
       render :new

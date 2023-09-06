@@ -5,13 +5,13 @@
       <div class="space-y-2">
 <%= f.label :quantity, class: "block font-semibold text-white mt-2" %>
 <%= f.number_field :quantity, autofocus: true, class: "w-full p-2 border text-black rounded-lg focus:outline-none focus:border-blue-500", placeholder: "Quantity" %>
-
-
       <div class="space-y-2">
         <%= f.label :food_id, class: "block font-semibold text-white mt-2" %>
         <%= f.select :food_id, options_from_collection_for_select(@available_foods, 'id', 'name'), {}, { class: "w-full p-2 border text-black rounded-lg focus:outline-none focus:border-blue-500" } %>
       </div>
-
+<div class="mt-2 text-center text-white">
+  Can't find an ingredient? <%= link_to "Add your own!", foods_path, class: "text-blue-500" %>
+</div>
       <div class="mt-4">
         <%= f.submit "Add ingredient", class: "w-full py-2 px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 mt-4" %>
       </div>
