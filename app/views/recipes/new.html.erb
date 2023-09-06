@@ -6,27 +6,22 @@
         <%= form.label :name, class: "block font-semibold text-white" %>
         <%= form.text_field :name, class: "w-full p-2 border text-black rounded-lg focus:outline-none focus:border-blue-500" %>
       </div>
-
       <div class="space-y-2">
         <%= form.label :description, class: "block font-semibold text-white" %>
         <%= form.text_area :description, class: "w-full p-2 border text-black rounded-lg focus:outline-none focus:border-blue-500" %>
       </div>
-
       <div class="space-y-2">
         <%= form.label :preparation_time, class: "block font-semibold text-white" %> in mins
         <%= form.number_field :preparation_time, class: "w-full p-2 border text-black rounded-lg focus:outline-none focus:border-blue-500" %>
       </div>
-
       <div class="space-y-2">
         <%= form.label :cooking_time, class: "block font-semibold text-white" %> in mins
         <%= form.number_field :cooking_time, class: "w-full p-2 border text-black rounded-lg focus:outline-none focus:border-blue-500" %>
       </div>
-
       <div class="space-y-2 flex align-center">
         <%= form.check_box :public, class: "mr-2" %>
         <%= form.label :public, class: "font-semibold text-white" %>
       </div>
-
       <div class="mt-4">
         <%= form.submit "Create Recipe", class: "w-full py-2 px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600" %>
       </div>

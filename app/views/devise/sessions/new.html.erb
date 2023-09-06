@@ -1,20 +1,16 @@
 <div class="flex justify-center items-center h-full w-full">
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "bg-transparent p-8 rounded-lg w-80" }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "bg-transparent p-8 rounded-lg w-80" }) do |f| %>
     <div class="mb-4">
       <%= f.email_field :email, placeholder: "Email", autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
     </div>
-
     <div class="mb-6">
       <%= f.password_field :password, placeholder: "Password", autocomplete: "current-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
     </div>
-
-<div class="flex justify-center">
-  <%= f.submit :Login, class: "px-4 py-2 text-white font-semibold rounded-md bg-purple-800 hover:bg-purple-900 transition cursor-pointer w-full" %>
-</div>
-
-  <div class="links flex gap-2 justify-around mx-auto flex-wrap mt-4 items-center">
-    <%= render "devise/shared/links" %>
-  </div>
-
+    <div class="flex justify-center">
+      <%= f.submit :Login, class: "px-4 py-2 text-white font-semibold rounded-md bg-purple-800 hover:bg-purple-900 transition cursor-pointer w-full" %>
+    </div>
+    <div class="links flex gap-2 justify-around mx-auto flex-wrap mt-4 items-center">
+      <%= render "devise/shared/links" %>
+    </div>
   <% end %>
 </div>

@@ -15,7 +15,6 @@ class RecipeFoodsController < ApplicationController
       food = @recipe_food.food
       food.quantity -= @recipe_food.quantity
       food.save
-
       redirect_to recipe_path(@recipe.id)
     else
       render :new
@@ -33,8 +32,15 @@ class RecipeFoodsController < ApplicationController
     new_quantity = params[:recipe_food][:quantity].to_i
     quantity_diff = new_quantity - old_quantity
     if @recipe_food.update(quantity: new_quantity)
-      @recipe_food.food.update(quantity: @recipe_food.food.quantity - quantity_diff)
-      redirect_to recipe_path(params[:recipe_id]), notice: 'Your quantity updated successfully'
+      food = @recipe_food.food
+      if food.quantity <= 0
+        food.destroy
+        flash[:notice] = 'Food item is depleted and has been removed from the list.'
+        redirect_to recipe_path(params[:recipe_id])
+      else
+        food.update(quantity: food.quantity - quantity_diff)
+        redirect_to recipe_path(params[:recipe_id]), notice: 'Your quantity updated successfully'
+      end
     else
       flash[:alert] = 'Something went wrong, try again!'
       render :edit
