@@ -29,7 +29,11 @@ class RecipeFoodsController < ApplicationController
 
   def update
     @recipe_food = RecipeFood.find(params[:id])
-    if @recipe_food.update(quantity: params[:recipe_food][:quantity])
+    old_quantity = @recipe_food.quantity
+    new_quantity = params[:recipe_food][:quantity].to_i
+    quantity_diff = new_quantity - old_quantity
+    if @recipe_food.update(quantity: new_quantity)
+      @recipe_food.food.update(quantity: @recipe_food.food.quantity - quantity_diff)
       redirect_to recipe_path(params[:recipe_id]), notice: 'Your quantity updated successfully'
     else
       flash[:alert] = 'Something went wrong, try again!'
