@@ -47,24 +47,38 @@
   </div>
 <% end %>
     </div>
-    <table class="table-auto w-full mt-4">
-      <thead>
-        <tr class="bg-gray-800 text-white uppercase text-sm leading-normal">
-          <th class="px-6 py-3 text-center">Food</th>
-          <th class="px-6 py-3 text-center">Quantity</th>
-          <th class="px-6 py-3 text-center">Value</th>
-          <th class="px-6 py-3 text-center">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="text-gray-900 dark:text-white text-sm font-light">
-        <% @recipe.recipe_foods.includes(:food).each do |ingredient| %>
-          <tr class="border-b border-gray-300 hover:bg-gray-200 dark:hover:bg-black dark:hover:shadow-custom text-center">
-            <td class="px-6 py-4 whitespace-no-wrap"><%= ingredient.food.name %></td>
-            <td class="px-6 py-4 whitespace-no-wrap"><%= ingredient.quantity %></td>
-            <td class="px-6 py-4 whitespace-no-wrap">$ <%= ingredient.quantity * ingredient.food.price %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<table class="table-auto w-full mt-4">
+  <thead>
+    <tr class="bg-gray-800 text-white uppercase text-sm leading-normal">
+      <th class="px-6 py-3 text-center">Food</th>
+      <th class="px-6 py-3 text-center">Quantity</th>
+      <th class="px-6 py-3 text-center">Value</th>
+      <th class="px-6 py-3 text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="text-gray-900 dark:text-white text-sm font-light">
+    <% @recipe.recipe_foods.includes(:food).each do |ingredient| %>
+      <tr class="border-b border-gray-300 hover:bg-gray-200 dark:hover:bg-black dark:hover:shadow-custom text-center">
+        <td class="px-6 py-4 whitespace-no-wrap"><%= ingredient.food.name %></td>
+        <td class="px-6 py-4 whitespace-no-wrap"><%= ingredient.quantity %></td>
+        <td class="px-6 py-4 whitespace-no-wrap">$ <%= ingredient.quantity * ingredient.food.price %></td>
+<td class="px-6 py-4 whitespace-no-wrap flex justify-around">
+    <%= link_to(
+      "Modify",
+      edit_recipe_recipe_food_path(@recipe, ingredient),
+      class: 'bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded'
+    ) %>
+    <%= button_to(
+      "Remove",
+      recipe_recipe_food_path(@recipe, ingredient),
+      method: :delete,
+      data: { confirm: 'Are you sure you want to remove this ingredient?' },
+      class: 'bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded'
+    ) %>
+</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
   </div>
 </section>
