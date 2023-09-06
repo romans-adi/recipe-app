@@ -14,6 +14,11 @@
 
 <body class="min-h-screen bg-cover bg-fixed bg-center bg-no-repeat bg-background-image">
     <div class="overlay fixed inset-0 h-full bg-black opacity-50"></div>
+<% flash.each do |key, message| %>
+  <div class="bg-blue-200 text-blue-800 fixed border-l-4 border-blue-500 p-4 mb-4" role="alert">
+    <%= message %>
+  </div>
+<% end %>
 
   <%= render partial: "shared/navigation" %>
   <div class="container mx-auto">

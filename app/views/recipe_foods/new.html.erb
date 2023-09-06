@@ -1,17 +1,20 @@
-<h2>Add a new ingredient</h2>
+<div class="flex items-center justify-center h-full w-full">
+  <div class="w-full max-w-md text-white bg-black bg-opacity-50 rounded-lg p-8">
+    <h2 class="text-2xl font-semibold mb-4">Add a new ingredient</h2>
+<%= form_with model: @recipe_food, url: recipe_recipe_foods_path(@recipe.id), class: "space-y-4" do |f| %>
+      <div class="space-y-2">
+<%= f.label :quantity, class: "block font-semibold text-white mt-2" %>
+<%= f.number_field :quantity, autofocus: true, class: "w-full p-2 border text-black rounded-lg focus:outline-none focus:border-blue-500", placeholder: "Quantity" %>
 
-<%= form_with model: @ingredient, url: recipe_recipe_foods_path(@recipe.id) do |f| %>
-  <div class="field">
-    <%= f.label :quantity, class:"mt-2" %><br />
-    <%= f.number_field :quantity, autofocus: true, class: "form-control" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :food_id, class:"mt-2" %><br />
-    <%= f.select :food_id, options_from_collection_for_select(@available_foods, 'id', 'name'), {}, { class: "form-control" }%>
-  </div>
+      <div class="space-y-2">
+        <%= f.label :food_id, class: "block font-semibold text-white mt-2" %>
+        <%= f.select :food_id, options_from_collection_for_select(@available_foods, 'id', 'name'), {}, { class: "w-full p-2 border text-black rounded-lg focus:outline-none focus:border-blue-500" } %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Add ingredient", class: "mt-4 btn btn-success" %>
+      <div class="mt-4">
+        <%= f.submit "Add ingredient", class: "w-full py-2 px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 mt-4" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
