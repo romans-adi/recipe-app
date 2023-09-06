@@ -159,8 +159,6 @@ rails server
 
 5. The app will be accessible at `http://localhost:3000` in your web browser.
 
-```
-
   If you encounter any issues with the email verification process, please refer to the Devise documentation or seek assistance from the Devise community.
 
 7. If you have future features like GUI or interactive mode, follow the specific instructions provided for those features in the app's documentation.
