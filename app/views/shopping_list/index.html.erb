@@ -1,7 +1,6 @@
 <div class="text-center">
   <h2 class="text-3xl font-semibold text-white">Shopping List</h2>
 </div>
-
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
   <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
     <p class="font-semibold">Amount of food items to buy:</p>
@@ -12,16 +11,15 @@
     <p><%= number_to_currency(@total_price, unit: '$') %></p>
   </div>
 </div>
-
-  <% @foods.each do |ingredient| %>
-    <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
-      <p><%= ingredient.name %></p>
-    </div>
-    <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
-      <p><%= ingredient.total_quantity_recipes %> <%= ingredient.measurement_unit %></p>
-    </div>
-    <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
-      <p><%= number_to_currency(ingredient.price * ingredient.total_quantity_recipes, unit: '$') %></p>
-    </div>
-  <% end %>
+<% @foods.each do |ingredient| %>
+  <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
+    <p><%= ingredient.name %></p>
+  </div>
+  <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
+    <p><%= ingredient.total_quantity_recipes %> <%= ingredient.measurement_unit %></p>
+  </div>
+  <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
+    <p><%= number_to_currency(ingredient.price * ingredient.total_quantity_recipes, unit: '$') %></p>
+  </div>
+<% end %>
 </div>

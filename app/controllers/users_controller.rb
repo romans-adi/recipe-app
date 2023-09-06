@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   def index
     @users = User.includes(:recipes).all
     @user = current_user
+    @recipes = Recipe.accessible_by(current_ability)
+    
   end
 
   def show

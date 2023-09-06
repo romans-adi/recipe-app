@@ -1,20 +1,17 @@
       <% if user_signed_in? %>
-<nav class="bg-gray-700 px-4 py-8">
-  <div class="container mx-auto flex justify-between items-center">
-    <div class="text-white cursor-none text-2xl font-semibold">
-Ultimate Recipe Assistant
+  <nav class="bg-gray-700 px-4 py-8">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="text-white cursor-none text-2xl font-semibold">
+        Ultimate Recipe Assistant
+      </div>
+      <div class="space-x-4">
+        <%= link_to "My Recipes", my_recipes_path, class: "bg-sky-600 text-white font-semibold px-4 py-2 hover:shadow-2xl hover:bg-sky-500 transform transition-transform duration-300 ease-in-out hover:no-underline shadow-2xl shadow-sky-500" %>
+        <%= link_to "Public Recipes", public_recipes_path, class: "bg-sky-600 text-white font-semibold px-4 py-2 hover:shadow-2xl hover:bg-sky-500 transform transition-transform duration-300 ease-in-out hover:no-underline shadow-2xl shadow-sky-500" %>
+      </div>
+      <%= link_to "Add Recipe",  new_recipe_path, id: "new-recipe", class: "text-sky-600 bg-white float-right hover:bg-sky-500 hover:no-underline hover:text-white font-bold py-2 px-4 rounded " %>
     </div>
-    <div class="space-x-4">
-<%= link_to "My Recipes", my_recipes_path, class: "bg-sky-600 text-white font-semibold px-4 py-2 hover:shadow-2xl hover:bg-sky-500 transform transition-transform duration-300 ease-in-out hover:no-underline shadow-2xl shadow-sky-500" %>
-
-<%= link_to "Public Recipes", public_recipes_path, class: "bg-sky-600 text-white font-semibold px-4 py-2 hover:shadow-2xl hover:bg-sky-500 transform transition-transform duration-300 ease-in-out hover:no-underline shadow-2xl shadow-sky-500" %>
-
-      <!-- To add Shopping List and Foods links after creating -->
-    </div>
-<%= link_to "Add Recipe",  new_recipe_path, id: "new-recipe", class: "text-sky-600 bg-white float-right hover:bg-sky-500 hover:no-underline hover:text-white font-bold py-2 px-4 rounded " %>
-  </div>
-      <div class='float-right w-full mt-4 mb-4'>
-  <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-white font-semibold py-2 h-14 px-4 bg-red-600 hover:bg-red-800 hover:no-underline" %>
-<% end %>
+    <div class='float-right w-full mt-4 mb-4'>
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-white font-semibold py-2 h-14 px-4 bg-red-600 hover:bg-red-800 hover:no-underline" %>
+    <% end %>
   </div>
 </nav>

@@ -7,6 +7,7 @@ class FoodsController < ApplicationController
   def new
     @current_user = current_user
     @food = Food.new
+    @measurement_units = %w[grams kilograms liters milliliters pieces cups teaspoons tablespoons]
   end
 
   def create
@@ -29,6 +30,6 @@ class FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food).permit(:name, :measurement_unit, :price)
+    params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
   end
 end
