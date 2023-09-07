@@ -1,3 +1,4 @@
+<% if @foods.present? %>
 <div class="text-center">
   <h2 class="text-3xl font-semibold text-white">Shopping List</h2>
 </div>
@@ -11,22 +12,48 @@
     <p><%= number_to_currency(@total_price, unit: '$') %></p>
   </div>
 </div>
-<table class="mt-4 w-full bg-black bg-opacity-50 shadow-md rounded-md overflow-hidden text-white">
-  <thead class="bg-black bg-opacity-75 border-b">
-    <tr>
-      <th class="py-3 px-4">Food</th>
-      <th class="py-3 px-4">Quantity</th>
-      <th class="py-3 px-4">Total Price</th>
-    </tr>
-  </thead>
+<table data-controller="sort" class="mt-4 w-full bg-black bg-opacity-50 shadow-md rounded-md overflow-hidden text-white">
+<thead class="bg-black bg-opacity-75 border-b">
+  <tr>
+    <th
+      data-action="click->sort#sort"
+      data-sort-column="food"
+      data-sort-order="asc"
+    >
+      Food
+      <i class="fas fa-sort"></i>
+    </th>
+    <th
+      data-action="click->sort#sort"
+      data-sort-column="quantity"
+      data-sort-order="asc"
+    >
+      Quantity
+      <i class="fas fa-sort"></i>
+    </th>
+    <th
+      data-action="click->sort#sort"
+      data-sort-column="price"
+      data-sort-order="asc"
+    >
+      Price
+      <i class="fas fa-sort"></i>
+    </th>
+  </tr>
+</thead>
   <tbody>
     <% @foods.each do |ingredient| %>
       <tr class="border-b">
-        <td class="py-3 px-4"><%= ingredient.name %></td>
-        <td class="py-3 px-4"><%= ingredient.total_quantity_recipes %> <%= ingredient.measurement_unit %></td>
-        <td class="py-3 px-4"><%= number_to_currency(ingredient.price * ingredient.total_quantity_recipes, unit: '$') %></td>
+        <td class="py-3 px-4 text-center"><%= ingredient.name %></td>
+        <td class="py-3 px-4 text-center"><%= ingredient.total_quantity_recipes %> <%= ingredient.measurement_unit %></td>
+        <td class="py-3 px-4 text-center"><%= number_to_currency(ingredient.price * ingredient.total_quantity_recipes, unit: '$') %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+ <h1 class="text-2xl font-semibold text-white">
+    There's no items in the shopping list yet.
+  </h1>
+<% end %>
 </div>
