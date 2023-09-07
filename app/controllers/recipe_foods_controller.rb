@@ -11,7 +11,7 @@ class RecipeFoodsController < ApplicationController
     quantity = params[:recipe_food][:quantity].to_i
 
     if quantity.positive?
-      @recipe_food = RecipeFood.new(recipe_id: @recipe.id, food_id: @food.id, quantity: quantity)
+      @recipe_food = RecipeFood.new(recipe_id: @recipe.id, food_id: @food.id, quantity:)
       if @recipe_food.save
         @food.update(quantity: @food.quantity + quantity)
         redirect_to recipe_path(@recipe.id)

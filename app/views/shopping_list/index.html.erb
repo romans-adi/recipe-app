@@ -16,30 +16,55 @@
     <table class="mt-4 w-full bg-black bg-opacity-50 shadow-md rounded-md overflow-hidden text-white">
       <thead class="bg-black bg-opacity-75 border-b">
         <tr>
-          <th id="food">
-<%= sort_link(column: "Food", target: "ingredients", recipe_id: @recipe.id) do %>
-            <i class="fas fa-sort"></i>
-            <% end %>
-          </th>
-          <th id="quantity">
-            <%= sort_link(column: "Quantity", label: "Quantity", target: "ingredients", recipe_id: @recipe.id) %>
-            <i class="fas fa-sort"></i>
-          </th>
-          <th id="price">
-            <%= sort_link(column: "Price", label: "Price", target: "ingredients", recipe_id: @recipe.id) %>
-            <i class="fas fa-sort"></i>
-          </th>
+<th id="food">
+<%= sort_link(column: "name", label: "Food", target: "ingredients") %>
+  <% if params[:sort] == "name" %>
+    <% if params[:direction] == "asc" %>
+      <i class="fas fa-sort-up"></i>
+    <% else %>
+      <i class="fas fa-sort-down"></i>
+    <% end %>
+  <% else %>
+    <i class="fas fa-sort"></i>
+  <% end %>
+</th>
+<th id="quantity">
+<%= sort_link(column: "quantity", label: "Quantity", target: "ingredients") %>
+  <% if params[:sort] == "quantity" %>
+    <% if params[:direction] == "asc" %>
+      <i class="fas fa-sort-up"></i>
+    <% else %>
+      <i class="fas fa-sort-down"></i>
+    <% end %>
+  <% else %>
+    <i class="fas fa-sort"></i>
+  <% end %>
+</th>
+<th id="price">
+<%= sort_link(column: "price", label: "Price", target: "ingredients") %>
+  <% if params[:sort] == "price" %>
+    <% if params[:direction] == "asc" %>
+      <i class="fas fa-sort-up"></i>
+    <% else %>
+      <i class="fas fa-sort-down"></i>
+    <% end %>
+  <% else %>
+    <i class="fas fa-sort"></i>
+  <% end %>
+</th>
+
+
         </tr>
       </thead>
-      <tbody>
-        <% @general_shopping_list.each do |ingredient| %>
-          <tr class="border-b">
-            <td class="py-3 px-4 text-center"><%= ingredient[:name] %></td>
-            <td class="py-3 px-4 text-center"><%= ingredient[:quantity] %> <%= ingredient[:measurement_unit] %></td>
-            <td class="py-3 px-4 text-center"><%= number_to_currency(ingredient[:price], unit: '$') %></td>
-          </tr>
-        <% end %>
-      </tbody>
+<tbody>
+<% @recipe_foods.each do |recipe_food| %>
+  <tr class="border-b">
+    <td class="py-3 px-4 text-center"><%= recipe_food.food.name %></td>
+    <td class="py-3 px-4 text-center"><%= recipe_food.quantity %></td>
+    <td class="py-3 px-4 text-center"><%= number_to_currency(recipe_food.food.price * recipe_food.quantity, unit: '$') %></td>
+  </tr>
+<% end %>
+</tbody>
     </table>
   <% end %>
 <% else %>

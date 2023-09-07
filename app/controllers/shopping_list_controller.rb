@@ -1,13 +1,31 @@
 class ShoppingListController < ApplicationController
   def index
     @recipe = Recipe.find(params[:recipe_id])
-    @recipe_foods = RecipeFood.where(recipe_id: @recipe.id).includes(:food)
-    @recipe_foods_with_names = @recipe_foods.map do |rf|
-      { id: rf.id, quantity: rf.quantity, recipe_id: rf.recipe_id, food_id: rf.food_id, name: rf.food.name,
-        price: rf.food.price }
+    sort_column, sort_direction = determine_sorting(params[:sort], params[:direction])
+    @recipe_foods = RecipeFood.where(recipe_id: @recipe.id)
+      .includes(food: :user)
+      .order("foods.#{sort_column} #{sort_direction}")
+
+    @general_shopping_list, @total = current_user.general_shopping_list(@recipe_foods)
+  end
+
+  private
+
+  def determine_sorting(sort_param, direction_param)
+    column = 'name'
+    direction = 'asc'
+
+    case sort_param
+    when 'food'
+      column = 'food'
+    when 'quantity'
+      column = 'quantity'
+    when 'price'
+      column = 'price'
     end
 
-    # Pass the @recipe_foods_with_names array to the current_user's general_shopping_list method
-    @general_shopping_list, @total = current_user.general_shopping_list(@recipe_foods_with_names)
+    direction = direction_param if %w[asc desc].include?(direction_param)
+
+    [column, direction]
   end
 end

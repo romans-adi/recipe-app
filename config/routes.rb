@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
   resources :foods, only: [:index, :new, :create, :destroy]
 
-  get '/recipes/:id/general_shopping_list/:column', to: 'recipes#general_shopping_list', as: 'general_shopping_list'
+  get '/recipes/:recipe_id/general_shopping_list/:sort', to: 'recipes#general_shopping_list', as: 'general_shopping_list'
   put '/recipes/:id/toggle_privacy', to: 'recipes#toggle_privacy', as: 'toggle_recipe_privacy'
   get 'my_recipes', to: 'recipes#my_recipes'
   get '/recipes/:recipe_id/shopping_list', to: 'shopping_list#index', as: 'shopping_list'

@@ -27,7 +27,7 @@ class User < ApplicationRecord
         food = Food.find(food_id)
         shopping_list[food_id] = {
           name: food.name,
-          quantity: quantity,
+          quantity:,
           price: food.price
         }
       end
