@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .fa-sort-up {
-  @apply inline-block text-gray-400 ml-2; /* Adjust styling as needed */
+  @apply inline-block text-gray-400; /* Adjust styling as needed */
 }
 
 .fa-sort-down {
-  @apply inline-block text-gray-400 ml-2; /* Adjust styling as needed */
+  @apply inline-block text-gray-400; /* Adjust styling as needed */
 }
