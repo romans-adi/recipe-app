@@ -12,45 +12,37 @@
     <p><%= number_to_currency(@total_price, unit: '$') %></p>
   </div>
 </div>
-<table data-controller="sort" class="mt-4 w-full bg-black bg-opacity-50 shadow-md rounded-md overflow-hidden text-white">
-<thead class="bg-black bg-opacity-75 border-b">
-  <tr>
-    <th
-      data-action="click->sort#sort"
-      data-sort-column="food"
-      data-sort-order="asc"
-    >
-      Food
-      <i class="fas fa-sort"></i>
-    </th>
-    <th
-      data-action="click->sort#sort"
-      data-sort-column="quantity"
-      data-sort-order="asc"
-    >
-      Quantity
-      <i class="fas fa-sort"></i>
-    </th>
-    <th
-      data-action="click->sort#sort"
-      data-sort-column="price"
-      data-sort-order="asc"
-    >
-      Price
-      <i class="fas fa-sort"></i>
-    </th>
-  </tr>
-</thead>
-  <tbody>
-    <% @foods.each do |ingredient| %>
-      <tr class="border-b">
-        <td class="py-3 px-4 text-center"><%= ingredient.name %></td>
-        <td class="py-3 px-4 text-center"><%= ingredient.total_quantity_recipes %> <%= ingredient.measurement_unit %></td>
-        <td class="py-3 px-4 text-center"><%= number_to_currency(ingredient.price * ingredient.total_quantity_recipes, unit: '$') %></td>
-      </tr>
-    <% end %>
+    <%= turbo_frame_tag "ingredients" do %>
+      <table class="mt-4 w-full bg-black bg-opacity-50 shadow-md rounded-md overflow-hidden text-white">
+        <thead class="bg-black bg-opacity-75 border-b">
+          <tr>
+            <th id="food">
+<%= sort_link(column: "Food", label: "Food", target: "ingredients", recipe_id: @recipe.id) %>
+    <%= puts@recipe.id %>
+
+              <i class="fas fa-sort"></i>
+            </th>
+            <th id="quantity">
+              <%= sort_link(column: "Quantity", label: "Quantity", target: "ingredients", recipe_id: @recipe.id) %>
+              <i class="fas fa-sort"></i>
+            </th>
+            <th id="price">
+              <%= sort_link(column: "Price", label: "Price", target: "ingredients", recipe_id: @recipe.id) %>
+              <i class="fas fa-sort"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @foods.each do |ingredient| %>
+            <tr class="border-b">
+              <td class="py-3 px-4 text-center"><%= ingredient.name %></td>
+              <td class="py-3 px-4 text-center"><%= ingredient.total_quantity_recipes %> <%= ingredient.measurement_unit %></td>
+              <td class="py-3 px-4 text-center"><%= number_to_currency(ingredient.price * ingredient.total_quantity_recipes, unit: '$') %></td>
+            </tr>
+          <% end %>
   </tbody>
 </table>
+<% end %>
 <% else %>
  <h1 class="text-2xl font-semibold text-white">
     There's no items in the shopping list yet.
