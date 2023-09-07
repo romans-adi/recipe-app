@@ -61,7 +61,7 @@
   <tr class="border-b">
     <td class="py-3 px-4 text-center"><%= recipe_food.food.name %></td>
     <td class="py-3 px-4 text-center"><%= recipe_food.quantity %></td>
-    <td class="py-3 px-4 text-center"><%= number_to_currency(recipe_food.food.price * recipe_food.quantity, unit: '$') %></td>
+<td class="py-3 px-4 text-center"><%= number_to_currency(recipe_food.calculated_price, unit: '$') %></td>
   </tr>
 <% end %>
 </tbody>
