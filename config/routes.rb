@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   get 'my_recipes', to: 'recipes#my_recipes'
   get '/recipes/:recipe_id/shopping_list', to: 'shopping_list#index', as: 'shopping_list'
   get '/public_recipes', to: 'recipes#index_public', as: 'public_recipes'
+  get '*path', to: redirect('/my_recipes')
 end
