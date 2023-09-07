@@ -6,7 +6,6 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find_by(id: params[:id])
-    render file: "#{Rails.root}/public/404.html", status: 404 unless @recipe
     @ingredients = @recipe.recipe_foods.includes(:food)
   end
 
@@ -34,8 +33,6 @@ class RecipesController < ApplicationController
 
   def destroy
     @recipe = Recipe.find_by(id: params[:id])
-    return render file: "#{Rails.root}/public/404.html", status: 404 unless @recipe
-
     if @recipe.destroy
       flash[:notice] = 'Recipe Deleted'
       redirect_back(fallback_location: root_path)
@@ -48,7 +45,7 @@ class RecipesController < ApplicationController
 
   def toggle_privacy
     @recipe = Recipe.find(params[:id])
-    @recipe.toggle_privacy!
+    @recipe.update(public: !@recipe.public)
     redirect_to recipe_path(@recipe)
   end
 

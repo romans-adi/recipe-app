@@ -14,6 +14,7 @@ class RecipeFoodsController < ApplicationController
       @recipe_food = RecipeFood.new(recipe_id: @recipe.id, food_id: @food.id, quantity:)
       if @recipe_food.save
         @food.update(quantity: @food.quantity + quantity)
+        flash[:notice] = 'Ingredient created successfully'
         redirect_to recipe_path(@recipe.id)
       else
         render :new
@@ -25,8 +26,8 @@ class RecipeFoodsController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.find(params[:recipe_id])
     @recipe_food = RecipeFood.find(params[:id])
+    @recipe = @recipe_food.recipe
   end
 
   def update
@@ -34,19 +35,17 @@ class RecipeFoodsController < ApplicationController
     old_quantity = @recipe_food.quantity
     new_quantity = params[:recipe_food][:quantity].to_i
     quantity_diff = new_quantity - old_quantity
-    if @recipe_food.update(quantity: new_quantity)
-      food = @recipe_food.food
-      if food.quantity <= 0
-        food.destroy
-        flash[:notice] = 'Food item is depleted and has been removed from the list.'
-        redirect_to recipe_path(params[:recipe_id])
-      else
-        food.update(quantity: food.quantity - quantity_diff)
-        redirect_to recipe_path(params[:recipe_id]), notice: 'Your quantity updated successfully'
-      end
+
+    food = @recipe_food.food
+    food_quantity = food.quantity + quantity_diff
+
+    if new_quantity <= 0
+      flash[:alert] = 'Quantity must be a positive number'
+      redirect_to edit_recipe_recipe_food_path(params[:recipe_id], @recipe_food)
     else
-      flash[:alert] = 'Something went wrong, try again!'
-      render :edit
+      @recipe_food.update(quantity: new_quantity)
+      food.update(quantity: food_quantity)
+      redirect_to recipe_path(params[:recipe_id]), notice: 'Quantity updated successfully'
     end
   end
 
@@ -54,12 +53,12 @@ class RecipeFoodsController < ApplicationController
     @recipe_food = RecipeFood.find_by_id(params[:id])
     if @recipe_food
       if @recipe_food.destroy
-        flash[:notice] = 'Ingredient deleted.'
+        flash[:notice] = 'Ingredient deleted'
       else
-        flash[:alert] = 'Ingredient deletion unsuccessful.'
+        flash[:alert] = 'Ingredient deletion unsuccessful'
       end
     else
-      flash[:alert] = 'Ingredient not found.'
+      flash[:alert] = 'Ingredient not found'
     end
     redirect_to recipe_path(params[:recipe_id])
   end

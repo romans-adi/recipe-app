@@ -39,13 +39,16 @@ RSpec.configure do |config|
     DatabaseCleaner.start
   end
 
-  config.define_derived_metadata(file_path: Regexp.new('/spec/requests/')) do |metadata|
-    metadata[:type] = :request
-  end
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.define_derived_metadata(file_path: Regexp.new('/spec/requests/')) do |metadata|
+    metadata[:type] = :request
+  end
+
   config.fixture_path = "#{Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
