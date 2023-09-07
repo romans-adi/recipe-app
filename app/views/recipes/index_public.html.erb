@@ -14,7 +14,7 @@
               </div>
               <div class="flex-1 flex-col gap-4 my-4">
                 <span class="flex">Food Quantity: <%= recipe.recipe_foods.sum(:quantity) %></span>
-                <span class="flex">Total Price: $<%= number_to_currency(recipe.total_price, unit: '$') %></span>
+                <span class="flex">Total Price: <%= number_to_currency(recipe.total_price, unit: '$') %></span>
               </div>
             </div>
           </li>

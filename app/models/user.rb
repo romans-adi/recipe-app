@@ -12,4 +12,29 @@ class User < ApplicationRecord
   def admin?
     role == 'admin'
   end
+
+  def general_shopping_list(recipe_foods)
+    shopping_list = {}
+    total_price = 0
+
+    recipe_foods.each do |rf|
+      food_id = rf[:food_id]
+      quantity = rf[:quantity]
+
+      if shopping_list[food_id]
+        shopping_list[food_id][:quantity] += quantity
+      else
+        food = Food.find(food_id)
+        shopping_list[food_id] = {
+          name: food.name,
+          quantity: quantity,
+          price: food.price
+        }
+      end
+
+      total_price += quantity * shopping_list[food_id][:price]
+    end
+
+    [shopping_list.values, total_price]
+  end
 end

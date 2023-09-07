@@ -1,6 +1,13 @@
 class ShoppingListController < ApplicationController
   def index
-    @current_user = current_user
-    @recipe = Recipe.find_by(id: params[:recipe_id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe_foods = RecipeFood.where(recipe_id: @recipe.id).includes(:food)
+    @recipe_foods_with_names = @recipe_foods.map do |rf|
+      { id: rf.id, quantity: rf.quantity, recipe_id: rf.recipe_id, food_id: rf.food_id, name: rf.food.name,
+        price: rf.food.price }
+    end
+
+    # Pass the @recipe_foods_with_names array to the current_user's general_shopping_list method
+    @general_shopping_list, @total = current_user.general_shopping_list(@recipe_foods_with_names)
   end
 end
