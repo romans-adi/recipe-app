@@ -1,22 +1,25 @@
 class RecipeFoodsController < ApplicationController
   def new
-    @current_user = current_user
-    @recipe = Recipe.find_by_id(params[:recipe_id])
-    @available_foods = current_user.foods.reject { |f| @recipe.foods.include?(f) }
+    @recipe = Recipe.find(params[:recipe_id])
+    @available_foods = Food.all
     @recipe_food = RecipeFood.new
-    @recipe_food.recipe = @recipe
   end
 
   def create
-    @recipe = Recipe.find_by_id(params[:recipe_id])
-    @available_foods = current_user.foods.reject { |f| @recipe.foods.include?(f) }
-    @recipe_food = RecipeFood.new(recipe_food_params.merge(recipe_id: @recipe.id, user_id: current_user.id))
-    if @recipe_food.save
-      food = @recipe_food.food
-      food.quantity -= @recipe_food.quantity
-      food.save
-      redirect_to recipe_path(@recipe.id)
+    @recipe = Recipe.find(params[:recipe_id])
+    @food = Food.find(params[:recipe_food][:food_id])
+    quantity = params[:recipe_food][:quantity].to_i
+
+    if quantity.positive?
+      @recipe_food = RecipeFood.new(recipe_id: @recipe.id, food_id: @food.id, quantity:)
+      if @recipe_food.save
+        @food.update(quantity: @food.quantity + quantity)
+        redirect_to recipe_path(@recipe.id)
+      else
+        render :new
+      end
     else
+      flash[:alert] = 'Quantity must be a positive number.'
       render :new
     end
   end

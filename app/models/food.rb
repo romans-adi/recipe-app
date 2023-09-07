@@ -5,6 +5,7 @@ class Food < ApplicationRecord
 
   validates :name, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
+  attribute :quantity, :integer, default: 0
 
   def total_quantity_recipes
     recipe_foods.sum(:quantity)

@@ -8,7 +8,6 @@
         <th class="text-left py-3 px-4">Food</th>
         <th class="text-left py-3 px-4">Measurement Unit</th>
         <th class="text-left py-3 px-4">Price</th>
-        <th class="text-left py-3 px-4">Quantity</th>
         <th class="text-left py-3 px-4">Actions</th>
       </tr>
     </thead>
@@ -18,7 +17,6 @@
           <td class="py-3 px-4"><%= food.name %></td>
           <td class="py-3 px-4"><%= food.measurement_unit %></td>
           <td class="py-3 px-4"><%= food.price %></td>
-          <td class="py-3 px-4"><%= food.quantity %></td>
           <td class="py-3 px-4">
             <%= button_to "Delete", "foods/#{food.id}", method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
           </td>
