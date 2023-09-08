@@ -62,8 +62,10 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'tailwindcss-rails', '~> 2.0'
 end
 
@@ -72,6 +74,7 @@ group :development do
   gem 'web-console'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
+  gem 'rack', '2.2.8'
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"

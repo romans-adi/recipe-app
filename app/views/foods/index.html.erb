@@ -16,7 +16,7 @@
         <tr class="border-b text-white">
           <td class="py-3 px-4"><%= food.name %></td>
           <td class="py-3 px-4"><%= food.measurement_unit %></td>
-          <td class="py-3 px-4"><%= food.price %></td>
+          <td class="py-3 px-4"><%= number_to_currency(food.price, unit: '$', precision: 2) %></td>
           <td class="py-3 px-4">
             <%= button_to "Delete", "foods/#{food.id}", method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
           </td>

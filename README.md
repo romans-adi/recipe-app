@@ -59,6 +59,8 @@ Introducing the Ultimate Recipe Assistant: Your all-in-one solution for effortle
 - [x] Optimized queries to handle n+1 problem.
 - [x] Integrated Devise gem for user authentication and registration.
 - [x] Integrated CanCanCan gem for user authorization (CRUD control).
+- [x] Tests to verify the behavior of controller actions and responses.
+- [x] Integration tests to cover user interactions.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -240,10 +242,10 @@ rails generate rspec:install
 rspec spec/models
 ```
 
-5. Alternatively, you could run tests for any specific suit using the following command (an example for Like model):
+5. Alternatively, you could run tests for any specific suit using the following command (an example for Food model):
 
 ```
-rspec spec/models/like_spec.rb
+rspec spec/models/food.rb
 ```
 
 6. All tests should pass without any errors or failures, ensuring that all models and their methods are functioning correctly.
@@ -261,8 +263,7 @@ rspec spec/models/like_spec.rb
 
 ## 🌟 Future Features <a name="future-features"></a>
 
-- [ ] Tests to verify the behavior of controller actions and responses.
-- [ ] Integration tests to cover user interactions.
+- [ ] Infinite scrolling pagination
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
