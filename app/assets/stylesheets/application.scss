@@ -1,0 +1,32 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+@import 'font-awesome';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  /* stylelint-disable csstree/validator */
+  background-image: asset-url('bg.jpg');
+  /* stylelint-enable csstree/validator */
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  z-index: -1;
+}
