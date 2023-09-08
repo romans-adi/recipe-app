@@ -10,12 +10,11 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     root to: 'devise/sessions#new', as: :login
-    root to: 'devise/registrations#new', as: :sign_up
   end
 
   root 'recipes#my_recipes'
 
-  resources :recipes, only: [:new, :create, :index, :show, :destroy, :put] do
+  resources :recipes do
     resources :shopping_list, only: [:index]
     resources :recipe_foods, only: [:new, :create, :destroy, :edit, :update] do
       collection do

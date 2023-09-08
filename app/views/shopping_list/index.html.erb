@@ -4,67 +4,65 @@
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
     <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
-      <p class="font-semibold">Amount of food items to buy:</p>
+      <p class="font-semibold" id="amount">Amount of food items to buy:</p>
       <p><%= @general_shopping_list.length %></p>
     </div>
     <div class="bg-black bg-opacity-50 p-4 rounded-md shadow-md text-white">
-      <p class="font-semibold">Total value of food needed:</p>
+      <p class="font-semibold" id="total">Total value of food needed:</p>
       <p><%= number_to_currency(@total, unit: '$') %></p>
     </div>
   </div>
   <%= turbo_frame_tag "ingredients" do %>
-    <table class="mt-4 w-full bg-black bg-opacity-50 shadow-md rounded-md overflow-hidden text-white">
+    <table class="mt-4 w-full bg-black bg-opacity-50 shadow-md rounded-md overflow-hidden text-white" id="ingredients">
       <thead class="bg-black bg-opacity-75 border-b">
         <tr>
-<th id="food">
-<%= sort_link(column: "name", label: "Food", target: "ingredients") %>
-  <% if params[:sort] == "name" %>
-    <% if params[:direction] == "asc" %>
-      <i class="fas fa-sort-up"></i>
-    <% else %>
-      <i class="fas fa-sort-down"></i>
-    <% end %>
-  <% else %>
-    <i class="fas fa-sort"></i>
-  <% end %>
-</th>
-<th id="quantity">
-<%= sort_link(column: "quantity", label: "Quantity", target: "ingredients") %>
-  <% if params[:sort] == "quantity" %>
-    <% if params[:direction] == "asc" %>
-      <i class="fas fa-sort-up"></i>
-    <% else %>
-      <i class="fas fa-sort-down"></i>
-    <% end %>
-  <% else %>
-    <i class="fas fa-sort"></i>
-  <% end %>
-</th>
-<th id="price">
-<%= sort_link(column: "price", label: "Price", target: "ingredients") %>
-  <% if params[:sort] == "price" %>
-    <% if params[:direction] == "asc" %>
-      <i class="fas fa-sort-up"></i>
-    <% else %>
-      <i class="fas fa-sort-down"></i>
-    <% end %>
-  <% else %>
-    <i class="fas fa-sort"></i>
-  <% end %>
-</th>
-
-
+          <th id="food">
+            <%= sort_link(column: "name", label: "Food", target: "ingredients") %>
+            <% if params[:sort] == "name" %>
+              <% if params[:direction] == "asc" %>
+                <i class="fas fa-sort-up"></i>
+              <% else %>
+                <i class="fas fa-sort-down"></i>
+              <% end %>
+            <% else %>
+              <i class="fas fa-sort"></i>
+            <% end %>
+          </th>
+          <th id="quantity">
+            <%= sort_link(column: "quantity", label: "Quantity", target: "ingredients") %>
+            <% if params[:sort] == "quantity" %>
+              <% if params[:direction] == "asc" %>
+                <i class="fas fa-sort-up"></i>
+              <% else %>
+                <i class="fas fa-sort-down"></i>
+              <% end %>
+            <% else %>
+              <i class="fas fa-sort"></i>
+            <% end %>
+          </th>
+          <th id="price">
+            <%= sort_link(column: "price", label: "Price", target: "ingredients") %>
+            <% if params[:sort] == "price" %>
+              <% if params[:direction] == "asc" %>
+                <i class="fas fa-sort-up"></i>
+              <% else %>
+                <i class="fas fa-sort-down"></i>
+              <% end %>
+            <% else %>
+              <i class="fas fa-sort"></i>
+            <% end %>
+          </th>
         </tr>
       </thead>
-<tbody>
-<% @recipe_foods.each do |recipe_food| %>
-  <tr class="border-b">
-    <td class="py-3 px-4 text-center"><%= recipe_food.food.name %></td>
-    <td class="py-3 px-4 text-center"><%= recipe_food.quantity %></td>
-<td class="py-3 px-4 text-center"><%= number_to_currency(recipe_food.calculated_price, unit: '$') %></td>
-  </tr>
-<% end %>
-</tbody>
+      <tbody>
+        <% @recipe_foods.each do |recipe_food| %>
+          <tr class="border-b">
+            <td class="py-3 px-4 text-center"><%= recipe_food.food.name %></td>
+            <td class="py-3 px-4 text-center"><%= recipe_food.quantity %></td>
+            <td class="py-3 px-4 text-center"><%= number_to_currency(recipe_food.calculated_price, unit: '$') %></td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
   <% end %>
 <% else %>

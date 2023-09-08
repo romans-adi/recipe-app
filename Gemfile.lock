@@ -145,7 +145,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
-    minitest (5.19.0)
+    minitest (5.20.0)
     msgpack (1.7.2)
     net-imap (0.3.7)
       date
@@ -313,6 +313,7 @@ DEPENDENCIES
   jbuilder
   pg (~> 1.1)
   puma (~> 5.0)
+  rack (= 2.2.8)
   rails (~> 7.0.7)
   rails-controller-testing
   rspec-rails

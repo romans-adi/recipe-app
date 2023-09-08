@@ -10,7 +10,11 @@ class RecipesController < ApplicationController
   end
 
   def index_public
-    @recipes = Recipe.where('user_id = ? OR public = ?', current_user.id, true)
+    @recipes = if current_user
+                 Recipe.where('user_id = ? OR public = ?', current_user.id, true)
+               else
+                 Recipe.where(public: true)
+               end
     render 'index_public'
   end
 

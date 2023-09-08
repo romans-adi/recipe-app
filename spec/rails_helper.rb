@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'shoulda/matchers'
-require 'factory_bot_rails'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -12,15 +10,25 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
-RSpec.configure do |config|
-  config.include(Shoulda::Matchers::ActiveModel, type: :model)
-  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
 
+RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FactoryBot::Syntax::Methods
+  config.include ActionView::Helpers::NumberHelper, type: :feature
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each, type: :system) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
   end
 
   config.around(:each) do |example|
@@ -28,18 +36,6 @@ RSpec.configure do |config|
       example.run
     end
   end
-
-  config.before(:each, type: :system) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.include Rails.application.routes.url_helpers, type: :view
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.after(:each) do
     DatabaseCleaner.clean
