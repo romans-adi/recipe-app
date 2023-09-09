@@ -1,27 +1,43 @@
-<div class="table-responsive mt-4 w-full">
-  <div class="flex w-full flex-end flex-row-reverse">
-    <%= link_to "Add food", "foods/new", class: "bg-sky-600 text-white font-semibold px-4 py-2 hover:shadow-2xl hover:bg-sky-500 transform transition-transform duration-300 ease-in-out hover:no-underline shadow-2xl shadow-sky-500 mb-4" %>
+<div class="mt-4 w-full px-4">
+  <div class="flex w-full flex-wrap justify-between items-center mb-4">
+    <div class="w-full sm:w-auto mb-4 sm:mb-0">
+      <%= link_to "Add food", "foods/new", class: "bg-green-600 text-white font-semibold px-4 py-2 hover:shadow-2xl hover:bg-green-500 transform transition-transform duration-300 ease-in-out hover:no-underline hover:shadow-2xl hover:shadow-green-300" %>
+    </div>
   </div>
-  <table class="w-full bg-black bg-opacity-50 shadow-md rounded-lg overflow-hidden">
-    <thead class="bg-black bg-opacity-75 border-b text-white">
-      <tr>
-        <th class="text-left py-3 px-4">Food</th>
-        <th class="text-left py-3 px-4">Measurement Unit</th>
-        <th class="text-left py-3 px-4">Price</th>
-        <th class="text-left py-3 px-4">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
+  <div class="text-white">
+    <div class="grid grid-cols-4 gap-0 bg-black bg-opacity-50">
+      <div class="col-span-1 border text-md font-semibold border-gray-500 text-white text-center py-3 px-4">
+        Food
+      </div>
+      <div class="col-span-1 border text-md font-semibold border-gray-500 text-white text-center py-3 px-4">
+        Unit
+      </div>
+      <div class="col-span-1 border text-md font-semibold border-gray-500 text-white text-center py-3 px-4">
+        Price
+      </div>
+      <div class="col-span-1 border text-md font-semibold border-gray-500 text-white text-center py-3 px-4">
+        Actions
+      </div>
       <% @foods.each do |food| %>
-        <tr class="border-b text-white">
-          <td class="py-3 px-4"><%= food.name %></td>
-          <td class="py-3 px-4"><%= food.measurement_unit %></td>
-          <td class="py-3 px-4"><%= number_to_currency(food.price, unit: '$', precision: 2) %></td>
-          <td class="py-3 px-4">
-            <%= button_to "Delete", "foods/#{food.id}", method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" %>
-          </td>
-        </tr>
+        <div class="col-span-1 border border-gray-500 text-white text-center py-3 px-4">
+          <%= food.name %>
+        </div>
+        <div class="col-span-1 border border-gray-500 text-white text-center py-3 px-4">
+          <%= food.measurement_unit %>
+        </div>
+        <div class="col-span-1 border border-gray-500 text-white text-center py-3 px-4">
+          <%= number_to_currency(food.price, unit: '$', precision: 2) %>
+        </div>
+        <div class="col-span-1 border border-gray-500 text-white text-center py-3 px-4">
+          <%= button_to(
+          '<i class="fas fa-trash-alt"></i>'.html_safe,
+          "foods/#{food.id}",
+          method: :delete,
+          data: { confirm: 'Are you sure you want to remove this food?' },
+          class: 'text-red-500 hover:text-red-600 font-bold px-4 rounded m-2'
+          ) %>
+        </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
 </div>
