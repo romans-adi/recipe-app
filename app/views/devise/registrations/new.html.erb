@@ -1,24 +1,26 @@
-<div class="flex justify-center items-center h-full w-full">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: ({ class: "bg-transparent p-8 rounded-lg w-80" }), method: :post) do |f| %>
-    <h2 class="text-2xl font-semibold mb-4 text-white">Sign up</h2>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="mb-4">
-      <%= f.text_field :name, placeholder: "Name", autofocus: true, autocomplete: "name", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
-    </div>
-    <div class="mb-4">
-      <%= f.email_field :email, placeholder: "Email", autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
-    </div>
-    <div class="mb-4">
-      <%= f.password_field :password, placeholder: "Password", autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
-      <% if @minimum_password_length %>
-        <em class="text-white text-sm">(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %>
-    </div>
-    <div class="mb-6">
-      <%= f.password_field :password_confirmation, placeholder: "Confirm Password", autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
-    </div>
-    <div class="flex justify-center">
-      <%= f.submit "Sign up", class: "px-4 py-2 text-white rounded-md bg-purple-800 hover:bg-purple-900 transition cursor-pointer w-full" %>
-    </div>
+<div class="flex justify-center items-center h-screen">
+  <div class="bg-transparent p-8 rounded-lg w-full max-w-screen-sm">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), method: :post) do |f| %>
+      <h2 class="text-2xl font-semibold mb-4 text-white">Sign up</h2>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="mb-4">
+        <%= f.text_field :name, placeholder: "Name", autofocus: true, autocomplete: "name", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
+      </div>
+      <div class="mb-4">
+        <%= f.email_field :email, placeholder: "Email", autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
+      </div>
+      <div class="mb-4">
+        <%= f.password_field :password, placeholder: "Password", autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
+        <% if @minimum_password_length %>
+          <em class="text-white text-sm">(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+      </div>
+      <div class="mb-6">
+        <%= f.password_field :password_confirmation, placeholder: "Confirm Password", autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-500 transition" %>
+      </div>
+      <div class="flex justify-center">
+        <%= f.submit "Sign up", class: "px-4 py-2 text-white rounded-md bg-purple-800 hover:bg-purple-900 transition cursor-pointer w-full" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
