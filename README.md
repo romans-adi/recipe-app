@@ -61,6 +61,7 @@ Introducing the Ultimate Recipe Assistant: Your all-in-one solution for effortle
 - [x] Integrated CanCanCan gem for user authorization (CRUD control).
 - [x] Tests to verify the behavior of controller actions and responses.
 - [x] Integration tests to cover user interactions.
+- [x] Responsive Layout enables the application to adjust its appearance and content to suit different screen sizes and orientations.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

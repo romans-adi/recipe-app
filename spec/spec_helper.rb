@@ -1,6 +1,7 @@
 require 'capybara'
 require 'capybara/dsl'
 require 'selenium-webdriver'
+require 'shoulda/matchers'
 
 Capybara.register_driver :selenium_firefox do |app|
   Capybara::Selenium::Driver.new(app, browser: :firefox)

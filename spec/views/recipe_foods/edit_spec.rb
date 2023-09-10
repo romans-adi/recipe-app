@@ -20,7 +20,7 @@ RSpec.feature 'Edit Quantity', type: :feature do
     click_button 'Update quantity'
 
     expect(page).to have_content('Quantity updated successfully')
-    within('.table-auto') do
+    within('.grid') do
       expect(page).to have_content(new_quantity)
     end
   end
