@@ -58,33 +58,33 @@
       <div class="col-span-1 border text-md font-semibold border-gray-500 text-white text-center py-3 px-4">
         Actions
       </div>
-   <% @recipe.recipe_foods.includes(:food).each do |ingredient| %>
-  <div class="col-span-1 border-r border-gray-500 text-white text-center py-3 px-4">
-    <%= ingredient.food.name %>
-  </div>
-  <div class="col-span-1 border-l border-r border-gray-500 text-white text-center py-3 px-4">
-    <%= ingredient.quantity %>
-  </div>
-  <div class="col-span-1 border-l border-r border-gray-500 text-white text-center py-3 px-4">
-    <%= number_to_currency(ingredient.quantity * ingredient.food.price) %>
-  </div>
-  <div class="col-span-1 border-l border-gray-500 text-white text-center py-3 px-4">
-    <% if current_user == @recipe.user || current_user.admin? %>
-      <%= link_to(
+      <% @recipe.recipe_foods.includes(:food).each do |ingredient| %>
+        <div class="col-span-1 border-r border-gray-500 text-white text-center py-3 px-4">
+          <%= ingredient.food.name %>
+        </div>
+        <div class="col-span-1 border-l border-r border-gray-500 text-white text-center py-3 px-4">
+          <%= ingredient.quantity %>
+        </div>
+        <div class="col-span-1 border-l border-r border-gray-500 text-white text-center py-3 px-4">
+          <%= number_to_currency(ingredient.quantity * ingredient.food.price) %>
+        </div>
+        <div class="col-span-1 border-l border-gray-500 text-white text-center py-3 px-4">
+          <% if current_user == @recipe.user || current_user.admin? %>
+            <%= link_to(
         '<i class="fas fa-edit"></i>'.html_safe,
         edit_recipe_recipe_food_path(@recipe, ingredient),
         class: 'text-blue-500 hover:text-blue-600 font-bold py-2 px-4 rounded m-2'
       ) %>
-      <%= link_to(
+            <%= link_to(
         '<i class="fas fa-trash-alt"></i>'.html_safe,
         recipe_recipe_food_path(@recipe, ingredient),
         method: :delete,
         data: { confirm: 'Are you sure you want to remove this ingredient?' },
         class: 'text-red-500 hover:text-red-600 font-bold py-2 px-4 rounded m-2'
       ) %>
-    <% end %>
-  </div>
-<% end %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
